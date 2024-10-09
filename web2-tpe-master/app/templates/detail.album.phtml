@@ -1,0 +1,27 @@
+<?php require './app/templates/header.phtml' ?>
+<link rel="stylesheet" type="text/css" href="estilos.css">
+
+<h4 class="ps-2 fw-bold">Detalle de Álbum:</h4>
+<ul class="list-group">
+    <li class="list-group-item item-task">
+        <div>
+            <b><?= $album->album_nombre ?></b>
+            | <?= $album->artista ?>
+            | Año: <?= $album->anio ?>
+            | Discográfica: <?= $album->discografica ?>
+            | Duración: <?= $duracion ?>
+            | Número de tracks: <?= $tracks ?>
+        </div>
+    </li>
+    <?php foreach ($songs as $item) : ?>
+        <li class="list-group-item item-task">
+            <div>
+                <b><?= $item->track ?></b> 
+                | <a href="songs/<?= $item->cancion_id ?>"><?= $item->cancion_nombre ?></a>
+                | Duración: <?= $item->duracion ?>
+            </div>
+        </li>
+    <?php endforeach ?>
+</ul>
+
+<?php require './app/templates/footer.phtml' ?>
