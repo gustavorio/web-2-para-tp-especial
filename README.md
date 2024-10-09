@@ -1,8 +1,8 @@
 # TPE - Trabajo Practico Especial WEB 2 
 
-Entrega 18/09/2024
+Entrega 18/09/2024 TPE 1°
 
-Entrega 18/10/2024
+Entrega 18/10/2024 TPE 2°
 
 # Integrantes del Proyecto: 
 
