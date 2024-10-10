@@ -3,16 +3,16 @@
 require_once './app/controllers/controller.php';
 require_once './app/views/song.view.php';
 require_once './app/models/song.model.php';
-require_once './app/models/album.model.php';
+require_once './app/models/genre.model.php';
 
 class SongController extends Controller{
     private $songModel;
-    private $albumModel;
+    private $genreModel;
 
     public function __construct() {
         $this->view = new SongView();
         $this->songModel = new SongModel();
-        $this->albumModel = new AlbumModel();
+        $this->genreModel = new GenreModel();
     }
 
     public function list($id = null) {
@@ -21,20 +21,20 @@ class SongController extends Controller{
             $song = $this->songModel->getSong($id);
             //checkeamos si existe en la db
             if ($song) {
-                //pedimos el album correspondiente usando el FK de la cancion, q corresponde al id del album
-                $album = $this->albumModel->getAlbum($song->album);
+                //pedimos el genero correspondiente usando el FK de la cancion, q corresponde al id del genero
+                $genre = $this->genreModel->getGenre($song->genre);
                 //pasamos al view
-                $this->view->showSong($song, $album);
+                $this->view->showSong($song, $genre);
             } else {
                 //la cancion no existe en la db
                 $this->view->showError('La canción solicitada no existe en nuestra base de datos');
             }
         } else {        
-            //le pedimos la lista de canciones y la lista de albumes al modelo (para el select del form) y lo pasamos al view
+            //le pedimos la lista de canciones y la lista de generos al modelo (para el select del form) y lo pasamos al view
             $songs = $this->songModel->getSongs();
-            $albums = $this->albumModel->getAlbums();
+            $genres = $this->genreModel->getGenres();
 
-            $this->view->showSongs($songs, $albums);
+            $this->view->showSongs($songs, $genres);
         }
     }
 
@@ -44,23 +44,23 @@ class SongController extends Controller{
 
         //consigo los datos del formulario
         $cancion= $_POST['cancion'];
-        $album= $_POST['album'];
-        $duracion= $_POST['duracion'];
-        $track= $_POST['track'];
+        $artist= $_POST['artist'];
+        $duration= $_POST['duration'];
+        $genre= $_POST['genre'];
 
         //validaciones
-        if (empty($cancion) || empty($album) || empty($duracion) || empty($track)) {
+        if (empty($cancion) || empty($artist) || empty($duration) || empty($genre)) {
             //$this->view->showError("Debe completar todos los campos");
             return;
         }
 
         if ( isset($id) ) {
             //si se paso id, quiere decir que estoy modificando un item
-            $this->songModel->saveSong($cancion, $album, $duracion, $track, $id);
+            $this->songModel->saveSong($cancion, $artist, $duration, $genre, $id);
             header('Location: ' . BASE_URL . 'songs');
         } else {
             //de no pasarse un id, se agrega un nuevo item
-            $set = $this->songModel->saveSong($cancion, $album, $duracion, $track, $id);
+            $set = $this->songModel->saveSong($cancion, $artist, $duration, $genre, $id);
             if ($set) {
                 header('Location: ' . BASE_URL . 'songs');
             } else {
@@ -83,8 +83,8 @@ class SongController extends Controller{
 
         $song = $this->songModel->getSong($id);
         $songs = $this->songModel->getSongs();
-        $albums = $this->albumModel->getAlbums();
+        $genres = $this->genreModel->getGenres();
     
-        $this->view->editForm($song, $songs, $albums);
+        $this->view->editForm($song, $songs, $genres);
     }
 }

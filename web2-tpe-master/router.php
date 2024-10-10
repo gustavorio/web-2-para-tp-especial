@@ -1,10 +1,10 @@
 <?php
 require_once './app/config/config.php';
-require_once './app/controllers/album.controller.php';
+require_once './app/controllers/genre.controller.php';
 require_once './app/controllers/song.controller.php';
 require_once './app/controllers/auth.controller.php';
 
-$action = 'albums'; //accion por defecto
+$action = 'genres'; //accion por defecto
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
@@ -23,13 +23,13 @@ function parseUrl($url) {
 
 /*                                  --- TABLA DE ROUTING ---
 
-albums              ->      AlbumController()->list();          -Lista todos los albumes
-albums/id           ->      AlbumController()->list($id);       -Lista el detalle de un album
-albums-save         ->      AlbumController()->save();          -Guarda un nuevo album desde el form de alta
-albums-edit/id      ->      AlbumController()->edit($id);       -Carga el form de edicion
-albums-save/id      ->      AlbumController()->save($id);       -Guarda modificaciones a un album desde el form de edicion
-albums-remove/id    ->      AlbumController()->remove($id);     -Elimina un album si no tiene dependencias, de tenerlas da la eleccion al usuario
-albums-rmvall/id    ->      AlbumController()->rmvall($id);     -Elimina un album y todas sus dependencias 
+genres              ->      GenreController()->list();          -Lista todos los generos
+genres/id           ->      GenreController()->list($id);       -Lista el detalle de un genero
+genres-save         ->      GenreController()->save();          -Guarda un nuevo genero desde el form de alta
+genres-edit/id      ->      GenreController()->edit($id);       -Carga el form de edicion
+genres-save/id      ->      GenreController()->save($id);       -Guarda modificaciones a ungenero desde el form de edicion
+genres-remove/id    ->      GenreController()->remove($id);     -Elimina un genero si no tiene dependencias, de tenerlas da la eleccion al usuario
+genres-rmvall/id    ->      GenreController()->rmvall($id);     -Elimina un genero y todas sus dependencias 
 
 songs               ->      SongController()->list();           -Lista todas las canciones
 songs/id            ->      SongController()->list($id);        -Lista el detalle de una cancion
@@ -49,7 +49,7 @@ $params = parseUrl($action);
 $contr;
 
 switch ($params['category']) {
-    case 'albums':  $contr = new AlbumController(); break;
+    case 'genres':  $contr = new GenreController(); break;
     case 'songs':   $contr = new SongController();  break;
     case 'login':
     case 'auth':
@@ -60,11 +60,11 @@ switch ($params['category']) {
 }
 
 switch ($params['fullaction']) {
-    case 'albums':          $contr->list($params['id']);    break;
-    case 'albums-save':     $contr->save($params['id']);    break;
-    case 'albums-edit':     $contr->edit($params['id']);    break;
-    case 'albums-remove':   $contr->remove($params['id']);  break;
-    case 'albums-rmvall':   $contr->rmvall($params['id']);  break;
+    case 'genres':          $contr->list($params['id']);    break;
+    case 'genres-save':     $contr->save($params['id']);    break;
+    case 'genres-edit':     $contr->edit($params['id']);    break;
+    case 'genres-remove':   $contr->remove($params['id']);  break;
+    case 'genres-rmvall':   $contr->rmvall($params['id']);  break;
     
     case 'songs':           $contr->list($params['id']);    break;
     case 'songs-save':      $contr->save($params['id']);    break;

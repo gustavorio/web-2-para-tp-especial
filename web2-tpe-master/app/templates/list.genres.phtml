@@ -13,16 +13,16 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($albums as $item) : ?>
+        <?php foreach ($genres as $item) : ?>
             <tr>
-                <th><a href="albums/<?= $item->album_id ?>"><?= $item->album_nombre ?></a></th>
+                <th><a href="genres/<?= $item->id ?>"><?= $item->nombre ?></a></th>
                 <td><?= $item->artista ?></td>
                 <td><?= $item->anio ?></td>
                 <td><?= $item->discografica ?></td>
                 <?php if ($this->session) : ?>
                 <td>
-                    <a href="albums-edit/<?= $item->album_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
-                    <a href="albums-remove/<?= $item->album_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+                    <a href="albums-edit/<?= $item->id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
+                    <a href="albums-remove/<?= $item->id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
                 </td>
             </tr>
             <?php endif ?>

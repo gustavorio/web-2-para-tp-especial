@@ -1,9 +1,9 @@
 <?php
 
-class DbHelper {
+    class DbHelper {
 
     public static function tryCreateDB() {
-        $db = DB_NAME;
+        $db = DB_NAME; // Cambia esto por el nombre de tu base de datos
         $pdo = new PDO('mysql:host=' . DB_HOST, DB_USER, DB_PASS);
         $query = "CREATE DATABASE IF NOT EXISTS $db";
         $pdo->exec($query);
@@ -13,228 +13,101 @@ class DbHelper {
         $query = $db->query('SHOW TABLES');
         $tables = $query->fetchAll();
         
-        if ( count($tables) == 0 ) {
-            $hash = '$2y$10$bFU9Mj1GMR6yzxoQ06i.8Oc6B6x1ZYCAtOop7LzXDvJxlee29KA9W';
+        if (count($tables) == 0) {
+            // Se define la cadena SQL para crear tablas y datos iniciales
+            $hash = '$2y$10$GT4vCZd8lRH/nWxEczQO1uccmVjBxvu9AYVQ/qp0DlmvSA.Cctqju'; //Password hasheada anteriormente creada
             $sql = <<<END
-            -- phpMyAdmin SQL Dump
-            -- version 5.2.1
-            -- https://www.phpmyadmin.net/
-            --
-            -- Host: 127.0.0.1
-            -- Generation Time: Oct 18, 2023 at 04:14 AM
-            -- Server version: 10.4.28-MariaDB
-            -- PHP Version: 8.2.4
-
             SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
             START TRANSACTION;
             SET time_zone = "+00:00";
 
             --
-            -- Database: `musica`
+            -- Base de datos: `music_player`
             --
 
             -- --------------------------------------------------------
 
             --
-            -- Table structure for table `albumes`
+            -- Estructura de tabla para la tabla `genres`
             --
 
-            CREATE TABLE `albumes` (
-              `album_id` int(3) NOT NULL,
-              `album_nombre` varchar(50) NOT NULL,
-              `artista` varchar(50) NOT NULL,
-              `anio` int(4) NOT NULL,
-              `discografica` varchar(50) NOT NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+            CREATE TABLE `genres` (
+              `id` int(11) NOT NULL,
+              `nombre` varchar(50) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-            --
-            -- Dumping data for table `albumes`
-            --
-
-            INSERT INTO `albumes` (`album_id`, `album_nombre`, `artista`, `anio`, `discografica`) VALUES
-            (29, 'Black Album', 'Metallica', 1991, 'Elektra Records'),
-            (30, 'Blood Sugar Sex Magik', 'Red Hot Chili Peppers', 1991, 'Warner Bros. Records'),
-            (31, 'OK Computer', 'Radiohead', 1997, 'Parlophone, Capitol Records');
+            -- Volcado de datos para la tabla `genres`
+            INSERT INTO `genres` (`id`, `nombre`) VALUES
+            (1, 'Pop'),
+            (2, 'Rock'),
+            (3, 'Electro');
 
             -- --------------------------------------------------------
 
             --
-            -- Table structure for table `canciones`
+            -- Estructura de tabla para la tabla `songs`
             --
 
-            CREATE TABLE `canciones` (
-              `cancion_id` int(4) NOT NULL,
-              `cancion_nombre` varchar(50) NOT NULL,
-              `album` int(3) NOT NULL,
-              `duracion` int(4) NOT NULL,
-              `track` int(2) NOT NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
-            --
-            -- Dumping data for table `canciones`
-            --
-
-            INSERT INTO `canciones` (`cancion_id`, `cancion_nombre`, `album`, `duracion`, `track`) VALUES
-            (39, 'Enter Sandman', 29, 329, 1),
-            (40, 'Sad but True', 29, 324, 2),
-            (41, 'Holier Than Thou', 29, 227, 3),
-            (42, 'The Unforgiven', 29, 386, 4),
-            (43, 'Wherever I May Roam', 29, 402, 5),
-            (44, 'Don\'t Tread on Me', 29, 239, 6),
-            (45, 'Through the Neve', 29, 241, 7),
-            (46, 'Nothing Else Matters', 29, 388, 8),
-            (47, 'Of Wolf and Man', 29, 256, 9),
-            (48, 'The God That Failed', 29, 306, 10),
-            (49, 'My Friend of Misery', 29, 407, 11),
-            (50, 'The Struggle Within', 29, 231, 12),
-            (51, 'The Power of Equality', 30, 244, 1),
-            (52, 'If You Have to Ask', 30, 217, 2),
-            (53, 'Breaking the Gil', 30, 295, 3),
-            (54, 'Funky Monks', 30, 323, 4),
-            (55, 'Suck My Kiss', 30, 217, 5),
-            (56, 'I Could Have Lied', 30, 244, 6),
-            (57, 'Mellowship Slinky in B Major', 30, 240, 7),
-            (58, 'The Righteous & the Wicked', 30, 248, 8),
-            (59, 'Give It Away', 30, 283, 9),
-            (60, 'Blood Sugar Sex Magik', 30, 271, 10),
-            (61, 'Under the Bridge', 30, 267, 11),
-            (62, 'Naked in the Rain', 30, 266, 12),
-            (63, 'Apache Rose Peacock', 30, 282, 13),
-            (64, 'The Greeting Song', 30, 194, 14),
-            (65, 'My Lovely Man', 30, 279, 15),
-            (66, 'Sir Psycho Sexy', 30, 497, 16),
-            (67, 'They\'re Red Hot', 30, 71, 17),
-            (68, 'Airbag', 31, 284, 1),
-            (69, 'Paranoid Android', 31, 383, 2),
-            (70, 'Subterranean Homesick Alien', 31, 267, 3),
-            (71, 'Exit Music (For a Film)', 31, 264, 4),
-            (72, 'Let Down', 31, 299, 5),
-            (73, 'Karma Police', 31, 261, 6),
-            (74, 'Fitter Happier', 31, 117, 7),
-            (75, 'Electioneering', 31, 230, 8),
-            (76, 'Climbing Up the Walls', 31, 285, 9),
-            (77, 'No Surprises', 31, 228, 10),
-            (78, 'Lucky', 31, 259, 11),
-            (79, 'The Tourist', 31, 324, 12);
+            CREATE TABLE `songs` (
+              `id` int(11) NOT NULL,
+              `nombre` varchar(100) DEFAULT NULL,
+              `duration` time DEFAULT NULL,
+              `artist` varchar(100) DEFAULT NULL,
+              `lyrics` text DEFAULT NULL,
+              `url` text DEFAULT NULL,
+              `genre_id` int(11) DEFAULT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
             -- --------------------------------------------------------
 
             --
-            -- Table structure for table `usuarios`
+            -- Estructura de tabla para la tabla `users`
             --
 
-            CREATE TABLE `usuarios` (
-              `user_id` int(3) NOT NULL,
-              `user` varchar(50) NOT NULL,
-              `password` varchar(100) NOT NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+            CREATE TABLE `users` (
+              `id` int(11) NOT NULL,
+              `username` varchar(50) NOT NULL,
+              `password` varchar(255) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-            --
-            -- Dumping data for table `usuarios`
-            --
-
-            INSERT INTO `usuarios` (`user_id`, `user`, `password`) VALUES
+            -- Volcado de datos para la tabla `users`
+            INSERT INTO `users` (`id`, `username`, `password`) VALUES
             (1, 'webadmin', '$hash');
 
             -- --------------------------------------------------------
 
-            --
-            -- Table structure for table `comentarios`
-            --
+            -- Índices para tablas volcadas
+            -- Índices de la tabla `genres`
+            ALTER TABLE `genres`
+              ADD PRIMARY KEY (`id`);
 
-            CREATE TABLE `comentarios` (
-              `comentario_id` int(3) NOT NULL,
-              `comentario` varchar(300) NOT NULL,
-              `puntuacion` int(1) NOT NULL,
-              `album` int(3) NOT NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-            
-            --
-            -- Dumping data for table `comentarios`
-            --
+            -- Índices de la tabla `songs`
+            ALTER TABLE `songs`
+              ADD PRIMARY KEY (`id`),
+              ADD KEY `genre_id` (`genre_id`);
 
-            INSERT INTO `comentarios` (`comentario_id`, `comentario`, `puntuacion`, `album`) VALUES
-            (1, 'el mejor disco de la banda!!', 5, 29),
-            (2, '', 4, 30),
-            (3, 'Tiene mejores pero se deja escuchar', 3, 31);
+            -- Índices de la tabla `users`
+            ALTER TABLE `users`
+              ADD PRIMARY KEY (`id`);
 
-            --
-            -- Indexes for dumped tables
-            --
+            -- AUTO_INCREMENT de las tablas volcadas
+            ALTER TABLE `genres`
+              MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
-            --
-            -- Indexes for table `albumes`
-            --
-            ALTER TABLE `albumes`
-              ADD PRIMARY KEY (`album_id`);
+            ALTER TABLE `songs`
+              MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-            --
-            -- Indexes for table `canciones`
-            --
-            ALTER TABLE `canciones`
-              ADD PRIMARY KEY (`cancion_id`),
-              ADD KEY `FK_album` (`album`);
+            ALTER TABLE `users`
+              MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
-            --
-            -- Indexes for table `usuarios`
-            --
-            ALTER TABLE `usuarios`
-              ADD PRIMARY KEY (`user_id`);
-
-            --
-            -- Indexes for table `comentarios`
-            --
-            ALTER TABLE `comentarios`
-              ADD PRIMARY KEY (`comentario_id`),
-              ADD KEY `FK_album` (`album`);
-
-            --
-            -- AUTO_INCREMENT for dumped tables
-            --
-
-            --
-            -- AUTO_INCREMENT for table `albumes`
-            --
-            ALTER TABLE `albumes`
-              MODIFY `album_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
-            --
-            -- AUTO_INCREMENT for table `canciones`
-            --
-            ALTER TABLE `canciones`
-              MODIFY `cancion_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
-
-            --
-            -- AUTO_INCREMENT for table `usuarios`
-            --
-            ALTER TABLE `usuarios`
-              MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
-            --
-            -- AUTO_INCREMENT for table `comentarios`
-            --
-            ALTER TABLE `comentarios`
-              MODIFY `comentario_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
-            --
-            -- Constraints for dumped tables
-            --
-
-            --
-            -- Constraints for table `canciones`
-            --
-            ALTER TABLE `canciones`
-              ADD CONSTRAINT `canciones_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`album_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-            
-            --
-            -- Constraints for table `comentarios`
-            --
-            ALTER TABLE `comentarios`
-              ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`album_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;  
+            -- Restricciones para tablas volcadas
+            ALTER TABLE `songs`
+              ADD CONSTRAINT `songs_ibfk_1` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE;
 
             COMMIT;
             END;
+
             $db->query($sql);
         }
     }
-}
+    }

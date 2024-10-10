@@ -1,39 +1,39 @@
 <?php
 
 require_once './app/controllers/controller.php';
-require_once './app/views/album.view.php';
-require_once './app/models/album.model.php';
+require_once './app/views/genre.view.php';
+require_once './app/models/genre.model.php';
 require_once './app/models/song.model.php';
 
-class AlbumController extends Controller {
-    private $albumModel;
+class GenreController extends Controller {
+    private $genreModel;
     private $songModel;
 
     public function __construct() {
-        $this->view = new AlbumView();
-        $this->albumModel = new AlbumModel();
+        $this->view = new GenreView();
+        $this->genreModel = new GenreModel();
         $this->songModel = new SongModel();
     }
 
     public function list($id = null) {
         if ( isset($id) ) {
             //si id tiene un valor, pedimos al modelo el album correspondiente
-            $album = $this->albumModel->getAlbum($id);
-            if ($album) {
+            $genre = $this->genreModel->getGenre($id);
+            if ($genre) {
                 //pedimos las canciones correspondientes al album
-                $songs = $this->songModel->getAlbumSongs($id);
+                $songs = $this->songModel->getGenreSongs($id);
                 //le pasamos todo al view
-                $this->view->showAlbum($album, $songs);
+                $this->view->showGenre($genre, $songs);
             } else {
                 //el album no existe en la db
-                $this->view->showError('El album solicitado no existe en nuestra base de datos');
+                $this->view->showError('El genero solicitado no existe en nuestra base de datos');
             }
         } else {
             //le pedimos la lista de musica al modelo
-            $albums = $this->albumModel->getAlbums();
+            $genres = $this->genreModel->getGenres();
 
             //mandamos la lista a la vista para que la muestre
-            $this->view->showAlbums($albums);
+            $this->view->showGenres($genres);
         }
     }
 
@@ -42,28 +42,26 @@ class AlbumController extends Controller {
         AuthHelper::verify();
 
         //consigo los datos del formulario
-        $album= $_POST['album'];
+        $genre= $_POST['genre'];
         $artista= $_POST['artista'];
-        $anio= $_POST['anio'];
-        $discografica= $_POST['discografica'];
 
         //validaciones
-        if ( empty($album) || empty($artista) || empty($anio) || empty($discografica) ) {
+        if ( empty($genre) || empty($artista) ) {
             $this->view->showError("Debe completar todos los campos");
             return;
         }
 
         if ( isset($id) ) {
             //si se paso id, quiere decir que estoy modificando un item
-            $this->albumModel->saveAlbum($album, $artista, $anio, $discografica, $id);
+            $this->genreModel->saveGenre($genre, $artista, $id);
             header('Location: ' . BASE_URL . 'albums');
         } else {
             //de no pasarse un id, se agrega un nuevo item
-            $set = $this->albumModel->saveAlbum($album, $artista, $anio, $discografica);
+            $set = $this->genreModel->saveGenre($album, $artista);
             if ($set) {
-                header('Location: ' . BASE_URL . 'albums');
+                header('Location: ' . BASE_URL . 'generos');
             } else {
-                $this->view->showError("Error al insertar el album");
+                $this->view->showError("Error al insertar el Genero");
             }
         }
     }
@@ -72,12 +70,12 @@ class AlbumController extends Controller {
         //checkeamos que estemos logueado
         AuthHelper::verify();
 
-        $count = $this->albumModel->checkAlbum($id);
+        $count = $this->genreModel->checkAlbum($id);
         if ( $count > 0 ) {
-            $albums = $this->albumModel->getAlbums();
-            $this->view->removeConfirmation($count, $id, $albums);
+            $genres = $this->genreModel->getGenres();
+            $this->view->removeConfirmation($count, $id, $genres);
         } else {
-            header('Location: ' . BASE_URL . 'albums');                
+            header('Location: ' . BASE_URL . 'generos');                
         }
     }
 
@@ -87,13 +85,13 @@ class AlbumController extends Controller {
 
         //conseguimos los items a borrar
         $songs = $this->songModel->getAlbumSongs($id);
-        $album = $this->albumModel->getAlbum($id);
+        $genre = $this->genreModel->getGenre($id);
         //borramos todas las canciones primero
-        foreach ($songs as $song) { $this->songModel->deleteSong($song->cancion_id); }
-        //finalmente el album
-        $this->albumModel->deleteAlbum($id);
+        foreach ($songs as $song) { $this->songModel->deleteSong($song->id); }
+        //finalmente el genero
+        $this->genreModel->deleteGenre($id);
 
-        header('Location: ' . BASE_URL . 'albums');                
+        header('Location: ' . BASE_URL . 'generos');                
     }
 
     public function edit($id) {
@@ -101,9 +99,9 @@ class AlbumController extends Controller {
         AuthHelper::verify();
 
         //conseguimos los datos del item a editar
-        $album = $this->albumModel->getAlbum($id);
-        $albums= $this->albumModel->getAlbums();
+        $genre = $this->genreModel->getGenre($id);
+        $genres= $this->genreModel->getGenres();
 
-        $this->view->editForm($album, $albums);
+        $this->view->editForm($genre, $genres);
     }
 }

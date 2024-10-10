@@ -33,7 +33,7 @@ class AuthController extends Controller{
             
             AuthHelper::login($user);
             
-            header('Location: ' . BASE_URL . 'albums');
+            header('Location: ' . BASE_URL . 'genres');
         } else {
             $this->view->showLogin('Usuario inválido');
         }
@@ -41,6 +41,6 @@ class AuthController extends Controller{
 
     public function logout() {
         AuthHelper::logout();
-        header('Location: ' . BASE_URL . 'albums');    
+        header('Location: ' . BASE_URL . 'genres');    
     }
 }

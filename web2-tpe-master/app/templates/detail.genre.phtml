@@ -1,14 +1,13 @@
 <?php require './app/templates/header.phtml' ?>
-<link rel="stylesheet" type="text/css" href="estilos.css">
 
-<h4 class="ps-2 fw-bold">Detalle de Álbum:</h4>
+<h4 class="ps-2 fw-bold">Detalle del Genero:</h4>
 <ul class="list-group">
     <li class="list-group-item item-task">
         <div>
-            <b><?= $album->album_nombre ?></b>
-            | <?= $album->artista ?>
-            | Año: <?= $album->anio ?>
-            | Discográfica: <?= $album->discografica ?>
+            <b><?= $genre->nombre ?></b>
+            | <?= $genre->artista ?>
+            | Año: <?= $genre->anio ?>
+            | Discográfica: <?= $genre->discografica ?>
             | Duración: <?= $duracion ?>
             | Número de tracks: <?= $tracks ?>
         </div>
