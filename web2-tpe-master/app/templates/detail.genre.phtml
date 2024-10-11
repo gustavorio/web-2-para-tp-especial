@@ -1,15 +1,20 @@
 <?php require './app/templates/header.phtml' ?>
 
-<h4 class="ps-2 fw-bold">Detalle del Genero:</h4>
+<h2 class="ps-2 fw-bold">Detalles del Genero: <?= $genre->nombre ?></h2>
 <ul class="list-group">
     <li class="list-group-item item-task">
         <div>
-            <b><?= $genre->nombre ?></b>
-            | <?= $genre->id ?>
-            | Número de tracks: <?= $tracks ?>
+            <b> | ID: <?= $genre->id ?>
+            | Año de Creacion: <?= $genre->año ?>
+        </div>
+        <div>
+            <b> Historia del Genero Musical: </b>
+            <span><?= $genre->descripcion ?></span>
         </div>
     </li>
     <?php foreach ($songs as $item) : ?>
+
+    <h3>Cantidad de Canciones del Genero: <?= $tracks ?> </h3>
         <li class="list-group-item item-task">
             <div>
                 <b>Artista: <?= $item->artist ?></b>

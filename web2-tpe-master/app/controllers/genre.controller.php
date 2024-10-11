@@ -42,24 +42,25 @@ class GenreController extends Controller {
         AuthHelper::verify();
 
         //consigo los datos del formulario
-        $genre= $_POST['genre'];
-        $artista= $_POST['artista'];
+        $genre= $_POST['nombre'];
+        $anio= $_POST['anio'];
+        $descripcion= $_POST['descripcion'];
 
         //validaciones
-        if ( empty($genre) || empty($artista) ) {
+        if ( empty($genre) || empty($anio) || empty($descripcion) ) {
             $this->view->showError("Debe completar todos los campos");
             return;
         }
 
         if ( isset($id) ) {
             //si se paso id, quiere decir que estoy modificando un item
-            $this->genreModel->saveGenre($genre, $artista, $id);
-            header('Location: ' . BASE_URL . 'albums');
+            $this->genreModel->saveGenre($genre, $anio, $descripcion, $id);
+            header('Location: ' . BASE_URL . 'genres');
         } else {
             //de no pasarse un id, se agrega un nuevo item
-            $set = $this->genreModel->saveGenre($album, $artista);
+            $set = $this->genreModel->saveGenre($genre, $anio, $descripcion);
             if ($set) {
-                header('Location: ' . BASE_URL . 'generos');
+                header('Location: ' . BASE_URL . 'genres');
             } else {
                 $this->view->showError("Error al insertar el Genero");
             }
@@ -70,12 +71,12 @@ class GenreController extends Controller {
         //checkeamos que estemos logueado
         AuthHelper::verify();
 
-        $count = $this->genreModel->checkAlbum($id);
+        $count = $this->genreModel->checkGenre($id);
         if ( $count > 0 ) {
             $genres = $this->genreModel->getGenres();
             $this->view->removeConfirmation($count, $id, $genres);
         } else {
-            header('Location: ' . BASE_URL . 'generos');                
+            header('Location: ' . BASE_URL . 'genres');                
         }
     }
 
@@ -84,14 +85,14 @@ class GenreController extends Controller {
         AuthHelper::verify();
 
         //conseguimos los items a borrar
-        $songs = $this->songModel->getAlbumSongs($id);
+        $songs = $this->songModel->getGenreSongs($id);
         $genre = $this->genreModel->getGenre($id);
         //borramos todas las canciones primero
         foreach ($songs as $song) { $this->songModel->deleteSong($song->id); }
         //finalmente el genero
         $this->genreModel->deleteGenre($id);
 
-        header('Location: ' . BASE_URL . 'generos');                
+        header('Location: ' . BASE_URL . 'genres');                
     }
 
     public function edit($id) {

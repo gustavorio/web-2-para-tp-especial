@@ -20,13 +20,13 @@ class GenreModel extends Model {
         return $genre;
     }
 
-    public function saveGenre($genre, $id = null) {
+    public function saveGenre($genre, $anio, $descripcion, $id = null) {
         if (isset($id)) {
-            $query = $this->db->prepare('UPDATE genres SET nombre=? WHERE id=?');
-            $query->execute([$genre, $id]);
+            $query = $this->db->prepare('UPDATE genres SET nombre=?, año=?, descripcion=? WHERE id=?');
+            $query->execute([$genre, $anio, $descripcion, $id]);
         } else {
-            $query = $this->db->prepare('INSERT INTO genres (nombre) VALUES (?)');
-            $query->execute([$genre]);
+            $query = $this->db->prepare('INSERT INTO genres (nombre, año, descripcion) VALUES (?, ?, ?)');
+            $query->execute([$genre, $anio, $descripcion]);
 
             return $this->db->lastInsertId();
         }

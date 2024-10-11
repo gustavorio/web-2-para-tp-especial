@@ -7,20 +7,24 @@
     <thead>
         <tr>
             <th>Nombre de Genero</th>
-            <th>ID:</th>
-            <th>Acciones:</th>
+            <th>Año de Creacion:</th>
+            <?php if ($this->session) : ?>
+                <th>Acciones:</th>            
+                <th>ID:</th>
+            <?php endif ?>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($genres as $item) : ?>
             <tr>
                 <th><a href="genres/<?= $item->id ?>"><?= $item->nombre ?></a></th>
-                <td><?= $item->id ?></td>
+                <td><?= $item->año ?></td>
                 <?php if ($this->session) : ?>
                 <td>
                     <a href="genres-edit/<?= $item->id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
                     <a href="genres-remove/<?= $item->id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
                 </td>
+                <td><?= $item->id ?></td>
             </tr>
             <?php endif ?>
             <?php endforeach ?>

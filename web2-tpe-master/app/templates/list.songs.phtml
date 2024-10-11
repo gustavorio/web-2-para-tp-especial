@@ -10,7 +10,9 @@
             <th>Artist</th>
             <th>Duración</th>
             <th>Genero</th>
-            <th>Acciones:</th>
+            <?php if ($this->session) : ?>
+                <th>Acciones:</th>
+            <?php endif ?>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +21,7 @@
                 <th><a href="songs/<?= $item->id?>"><?= $item->title ?></a></th>
                 <td><?= $item->artist ?></a></td>
                 <td><?= $item->duration ?></td>
-                <td><?= $item->genre_id ?></td>
+                <td><?= $item->genre_name ?></td>
                 <?php if ($this->session) : ?>
                 <td>
                     <a href="songs-edit/<?= $item->id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>

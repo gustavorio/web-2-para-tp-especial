@@ -2,25 +2,18 @@
     <div class="row">
         <div class="form-group">
             <label>Genero</label>
-            <input required name="nombre" type="text" placeholder="Ingrese el nombre del genero" class="form-control">
+            <input required name="nombre" type="text" placeholder="Ingrese el nombre del nuevo genero" class="form-control">
         </div>
 
         <div class="form-group">
-            <label>Artista</label>
-            <input required name="artista" type="text" placeholder="Ingrese el artista" class="form-control"> 
+            <label>Año de Creacion del Genero:</label>
+            <input required name="anio" type="number" placeholder="Ingrese el año de creacion del genero" class="form-control"> 
         </div>
     </div>
 
-    <div class=row>
-        <div class="col-6">
-            <label>Año</label>
-            <input required name="anio" type="number" placeholder="Ingrese el año" class="form-control">
-        </div>
-    
-        <div class="col-6">
-            <label>Discográfica</label>
-            <input required name="discografica" type="text" placeholder="Ingrese el sello discográfico" class="form-control">
-        </div>
+    <div class="form-group">
+        <label for="descripcion">Historia del Genero:</label>
+        <textarea required name="descripcion" placeholder="Ingrese la descripcion historica del genero" class="form-control" rows="5"></textarea>
     </div>
     
     <button type="submit" class="btn btn-primary mt-2">Agregar</button>
