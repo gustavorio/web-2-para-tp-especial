@@ -44,23 +44,25 @@ class SongController extends Controller{
 
         //consigo los datos del formulario
         $cancion= $_POST['cancion'];
-        $artist= $_POST['artist'];
-        $duration= $_POST['duration'];
-        $genre= $_POST['genre'];
+        $artist= $_POST['artista'];
+        $duration= $_POST['duracion'];
+        $genre= $_POST['genero'];
+        $link= $_POST['link'];
+        $letra= $_POST['lyrics'];
 
         //validaciones
-        if (empty($cancion) || empty($artist) || empty($duration) || empty($genre)) {
+        if (empty($cancion) || empty($artist) || empty($duration) || empty($genre) || empty($link) || empty($letra)) {
             //$this->view->showError("Debe completar todos los campos");
             return;
         }
 
         if ( isset($id) ) {
             //si se paso id, quiere decir que estoy modificando un item
-            $this->songModel->saveSong($cancion, $artist, $duration, $genre, $id);
+            $this->songModel->saveSong($cancion, $artist, $duration, $genre, $link, $letra, $id);
             header('Location: ' . BASE_URL . 'songs');
         } else {
             //de no pasarse un id, se agrega un nuevo item
-            $set = $this->songModel->saveSong($cancion, $artist, $duration, $genre, $id);
+            $set = $this->songModel->saveSong($cancion, $artist, $duration, $genre, $link, $letra, $id);
             if ($set) {
                 header('Location: ' . BASE_URL . 'songs');
             } else {

@@ -7,22 +7,23 @@
     <thead>
         <tr>
             <th>Canción</th>
-            <th>Álbum</th>
+            <th>Artist</th>
             <th>Duración</th>
-            <th>Track</th>
+            <th>Genero</th>
+            <th>Acciones:</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($songs as $item) : ?>
             <tr>
                 <th><a href="songs/<?= $item->id?>"><?= $item->title ?></a></th>
-                <td><a href="albums/<?= $item->album ?>"><?= $item->album_nombre ?></a></td>
-                <td><?= $item->duracion ?></td>
-                <td><?= $item->track ?></td>
+                <td><?= $item->artist ?></a></td>
+                <td><?= $item->duration ?></td>
+                <td><?= $item->genre_id ?></td>
                 <?php if ($this->session) : ?>
                 <td>
-                    <a href="songs-edit/<?= $item->cancion_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
-                    <a href="songs-remove/<?= $item->cancion_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+                    <a href="songs-edit/<?= $item->id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
+                    <a href="songs-remove/<?= $item->id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
                 </td>
             </tr>
             <?php endif ?>

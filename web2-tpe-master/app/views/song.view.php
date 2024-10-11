@@ -8,7 +8,7 @@ class SongView extends View {
         
         //pasamos la duration de segundos a mm:ss
         foreach ($songs as $song) {
-            $song->duration = gmdate("i:s", $song->duration);
+            $song->duration;
         }
 
         //seteamos el form para agregar canciones

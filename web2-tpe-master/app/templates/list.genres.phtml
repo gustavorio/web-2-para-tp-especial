@@ -8,7 +8,7 @@
         <tr>
             <th>Nombre de Genero</th>
             <th>ID:</th>
-            <th>Cant. Canciones:</th>
+            <th>Acciones:</th>
         </tr>
     </thead>
     <tbody>
@@ -16,11 +16,10 @@
             <tr>
                 <th><a href="genres/<?= $item->id ?>"><?= $item->nombre ?></a></th>
                 <td><?= $item->id ?></td>
-                <td><?= $item->songs ?></td>
                 <?php if ($this->session) : ?>
                 <td>
-                    <a href="albums-edit/<?= $item->id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
-                    <a href="albums-remove/<?= $item->id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+                    <a href="genres-edit/<?= $item->id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
+                    <a href="genres-remove/<?= $item->id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
                 </td>
             </tr>
             <?php endif ?>

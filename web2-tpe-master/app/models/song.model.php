@@ -5,10 +5,9 @@ require_once './app/models/model.php';
 class SongModel extends Model {
 
     public function getSongs() {
-        $query = $this->db->prepare("SELECT * FROM songs WHERE genre_id = ? ORDER BY title");
-        $query->execute([$genre_id]);  // Aquí debes pasar el valor de $genre_id
+        $query = $this->db->prepare("SELECT * FROM songs ORDER BY title");
+        $query->execute();  // Aquí debes pasar el valor de $genre_id
         
-        $query->execute();
         $songs = $query->fetchAll(PDO::FETCH_OBJ);
         return $songs;
     }
@@ -29,13 +28,13 @@ class SongModel extends Model {
         return $songs;
     }
 
-    public function saveSong($song, $artist, $duration, $track, $id = null) {
+    public function saveSong($song, $artist, $duration, $genre, $link, $letra, $id = null) {
         if (isset($id)) {
-            $query = $this->db->prepare('UPDATE songs SET title=?, artist=?, duration=?, track=? WHERE id=?');
-            $query->execute([$song, $artist, $duration, $track, $id]);
+            $query = $this->db->prepare('UPDATE songs SET title=?, artist=?, duration=?, link=?, lyrics=? genre_id=? WHERE id=?');
+            $query->execute([$song, $artist, $duration, $genre, $link, $letra, $id]);
         } else {
-            $query = $this->db->prepare('INSERT INTO songs (title, artist, duration, track) VALUES(?, ?, ?, ?)');
-            $query->execute([$song, $artist, $duration, $track]);
+            $query = $this->db->prepare('INSERT INTO songs (title, artist, duration, link, lyrics, genre_id) VALUES(?, ?, ?, ?, ?, ?)');
+            $query->execute([$song, $artist, $duration, $genre, $link, $letra]);
 
             return $this->db->lastInsertId();
         }

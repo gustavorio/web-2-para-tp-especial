@@ -12,8 +12,8 @@ class AuthHelper {
     //Se utiliza para autenticar a un usuario, llama a "init" para asegurarse que la sesion este activa. Permite que la aplicacion reconozca al usuario en futuras solicitudes
     public static function login($user) {
         AuthHelper::init();
-        $_SESSION['USER_ID'] = $user->user_id;
-        $_SESSION['USER_NAME'] = $user->user; 
+        $_SESSION['USER_ID'] = $user->id;
+        $_SESSION['USER_NAME'] = $user->username; 
     }
 
     //Se encarga de cerrar la sesion del usuario
