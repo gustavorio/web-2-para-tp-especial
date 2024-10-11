@@ -102,7 +102,7 @@
             --
 
             INSERT INTO `users` (`id`, `username`, `password`) VALUES
-            (1, 'webadmin', '$2y$10$GT4vCZd8lRH/nWxEczQO1uccmVjBxvu9AYVQ/qp0DlmvSA.Cctqju');
+            (1, 'webadmin', '$hash');
 
             --
             -- Índices para tablas volcadas
