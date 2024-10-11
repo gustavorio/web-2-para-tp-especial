@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2024 a las 14:57:30
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Tiempo de generación: 11-10-2024 a las 03:44:34
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,13 +49,22 @@ INSERT INTO `genres` (`id`, `nombre`) VALUES
 
 CREATE TABLE `songs` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
   `duration` time DEFAULT NULL,
   `artist` varchar(100) DEFAULT NULL,
   `lyrics` text DEFAULT NULL,
   `url` text DEFAULT NULL,
   `genre_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `songs`
+--
+
+INSERT INTO `songs` (`id`, `title`, `duration`, `artist`, `lyrics`, `url`, `genre_id`) VALUES
+(1, 'Houdini', '03:05:00', 'Dua Lipa', '<br>Okay, huh<br>\r\nMm, ah<br>\r\n\r\n<br>I come and I go<br>\r\nTell me all the ways you need me<br>\r\nI\'m not here for long<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>I come and I go<br>\r\nProve you got the right to please me<br>\r\nEverybody knows<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>Time is passin\' like a solar eclipse<br>\r\nSee you watchin\' and you blow me a kiss<br>\r\nIt\'s your moment, baby, don\'t let it slip<br>\r\nCome in closer, are you readin\' my lips?<br>\r\n\r\n<br>They say I come and I go<br>\r\nTell me all the ways you need me<br>\r\nI\'m not here for long<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>I come and I go<br>\r\nProve you got the right to please me<br>\r\nEverybody knows<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>If you\'re good enough, you\'ll find a way<br>\r\nMaybe you could cause a girl to change (her ways)<br>\r\nDo you think about it night and day?<br>\r\nMaybe you could be the one to make me stay<br>\r\n\r\n<br>Everything you say is soundin\' so sweet (ah-ah)<br>\r\nBut do you practise everything that you preach? (Ah-ah)<br>\r\nI need something that\'ll make me believe (ah-ah)<br>\r\nIf you got it, baby, give it to me<br>\r\n\r\n<br>They say I come and I go<br>\r\nTell me all the ways you need me<br>\r\nI\'m not here for long<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>I come and I go (I come and I go)<br>\r\nProve you got the right to please me<br>\r\nEverybody knows (I\'m not here for long)<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>If you\'re good enough, you\'ll find a way<br>\r\nMaybe you could cause a girl to change (her ways)<br>\r\nDo you think about it night and day?<br>\r\nMaybe you could be the one to make me stay<br>\r\n\r\n<br>Oh-oh<br>\r\nOoh<br>\r\n\r\n<br>I come and I go<br>\r\nTell me all the ways you need me (ooh)<br>\r\nI\'m not here for long<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>I come and I go (I come and I go)<br>\r\nProve you got the right to please me<br>\r\nEverybody knows (I\'m not here for long)<br>\r\nCatch me or I go Houdini<br>\r\n\r\n<br>Houdini (ah)<br>\r\nCatch me or I go Houdini<br>', 'https://open.spotify.com/embed/track/4OMJGnvZfDvsePyCwRGO7X?utm_source=generator&theme=0', 1),
+(2, 'Otherside', '00:04:16', 'Red Hot Chilli Peppers', '<br>How long, how long will I slide?<br>\r\nSeparate my side, I don\'t<br>\r\nI don\'t believe it\'s bad<br>\r\nSlit my throat, it\'s all I ever<br>\r\n\r\n<br>I heard your voice through a photograph<br>\r\nI thought it up and brought up the past<br>\r\nOnce you know you can never go back<br>\r\nI gotta take it on the other side<br>\r\n\r\n<br>Well, centuries are what it meant to me<br>\r\nA cemetery where I marry the sea<br>\r\nA stranger thing could never change my mind<br>\r\nI gotta take it on the other side<br>\r\nTake it on the other side<br>\r\nTake it on, take it on<br>\r\n\r\n<br>How long, how long will I slide?<br>\r\nSeparate my side, I don\'t<br>\r\nI don\'t believe it\'s bad<br>\r\nSlit my throat, it\'s all I ever<br>\r\n\r\n<br>Pour my life into a paper cup<br>\r\nThe ashtray\'s full and I\'m spillin\' my guts<br>\r\nShe wanna know am I still a slut?<br>\r\nI\'ve got to take it on the other side<br>\r\n\r\n<br>A scarlet starlet and she\'s in my bed<br>\r\nA candidate for the soulmate bled<br>\r\nPush the trigger and pull the thread<br>\r\nI gotta take it on the other side<br>\r\nTake it on the other side<br>\r\nTake it on, take it on<br>\r\n\r\n<br>How long, how long will I slide?<br>\r\nSeparate my side, I don\'t<br>\r\nI don\'t believe it\'s bad<br>\r\nSlit my throat, it\'s all I ever<br>\r\n\r\n<br>Turn me on, take me for a hard ride<br>\r\nBurn me out, leave me on the other side<br>\r\nI yell and tell it that it\'s not my friend<br>\r\nI tear it down, I tear it down and then it\'s born again<br>\r\n\r\n<br>How long, how long will I slide?<br>\r\nSeparate my side, I don\'t<br>\r\nI don\'t believe it\'s bad<br>\r\nSlit my throat, it\'s all I ever had<br>\r\n(How long) I don\'t<br>\r\nI don\'t believe it\'s sad<br>\r\nSlit my throat, it\'s all I ever<br>', 'https://open.spotify.com/embed/track/64BbK9SFKH2jk86U3dGj2P?utm_source=generator&theme=0', 2),
+(3, 'The Nights', '00:02:56', 'Avicii', '<br>Once upon a younger year<br>\r\nWhen all our shadows disappeared<br>\r\nThe animals inside came out to play<br>\r\nWent face to face with all our fears<br>\r\nLearned our lessons through the tears<br>\r\n<br>Made memories we knew would never fade<br>\r\nOne day, my father, he told me, \"Son, don\'t let it slip away\"<br>\r\nHe took me in his arms, I heard him say<br>\r\n\"When you get older your wild heart will live for younger days<br>\r\nThink of me if ever you\'re afraid\"<br>\r\n<br>He said, \"One day, you\'ll leave this world behind<br>\r\nSo live a life you will remember\"<br>\r\nMy father told me when I was just a child<br>\r\n\"These are the nights that never die\"<br>\r\nMy father told me<br>\r\n<br>\"When thunderclouds start pouring down<br>\r\nLight a fire they can\'t put out<br>\r\nCarve your name into those shining stars\"<br>\r\nHe said, \"Go venture far beyond the shores<br>\r\nDon\'t forsake this life of yours<br>\r\nI\'ll guide you home no matter where you are\"<br>\r\n<br>One day, my father, he told me, \"Son, don\'t let it slip away\"<br>\r\nWhen I was just a kid, I heard him say<br>\r\n\"When you get older your wild heart will live for younger days<br>\r\nThink of me if ever you\'re afraid\"<br>\r\n<br>He said, \"One day, you\'ll leave this world behind<br>\r\nSo live a life you will remember\"<br>\r\nMy father told me when I was just a child<br>\r\n\"These are the nights that never die\"<br>\r\nMy father told me<br>\r\n<br>\"These are the nights that never die\"<br>\r\nMy father told me<br>\r\n<br>My father told me<br>', 'https://open.spotify.com/embed/track/0ct6r3EGTcMLPtrXHDvVjc?utm_source=generator&theme=0', 3);
 
 -- --------------------------------------------------------
 
@@ -113,7 +122,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT de la tabla `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
