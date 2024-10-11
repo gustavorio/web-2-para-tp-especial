@@ -2,23 +2,21 @@
 
 <?php if ($this->session) : require $form; endif ?>
 
-<h4 class="ps-2 fw-bold">Generos:</h4>
+<h4 class="ps-2 fw-bold">Elije un Generos:</h4>
 <table class="table">
     <thead>
         <tr>
-            <th>Álbum</th>
-            <th>Artista</th>
-            <th>Año</th>
-            <th>Genero</th>
+            <th>Nombre de Genero</th>
+            <th>ID:</th>
+            <th>Cant. Canciones:</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($genres as $item) : ?>
             <tr>
                 <th><a href="genres/<?= $item->id ?>"><?= $item->nombre ?></a></th>
-                <td><?= $item->artista ?></td>
-                <td><?= $item->anio ?></td>
-                <td><?= $item->discografica ?></td>
+                <td><?= $item->id ?></td>
+                <td><?= $item->songs ?></td>
                 <?php if ($this->session) : ?>
                 <td>
                     <a href="albums-edit/<?= $item->id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>

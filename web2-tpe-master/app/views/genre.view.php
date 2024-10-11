@@ -11,15 +11,7 @@ class GenreView extends View{
     }
 
     public function showGenre($genre, $songs) {
-        //sumamos la duration de cada cancion para calcular la del genero
-        $duration = 0;
-        foreach ($songs as $song) {
-            $duration += $song->duration;
-            $song->duration = gmdate("i:s", $song->duration);
-        }
-        //convertimos la duration de segundos a mm:ss
-        $duration = ( $duration > 3600 ) ? gmdate("h:i:s", $duration) : gmdate("i:s", $duration);
-        $tracks= count($songs);
+        $tracks = count($songs);
         require './app/templates/detail.genre.phtml';
     }
 

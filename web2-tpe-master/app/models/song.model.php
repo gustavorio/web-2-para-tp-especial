@@ -5,7 +5,8 @@ require_once './app/models/model.php';
 class SongModel extends Model {
 
     public function getSongs() {
-        $query = $this->db->prepare('SELECT * FROM songs WHERE genre_id=? ORDER BY title');
+        $query = $this->db->prepare("SELECT * FROM songs WHERE genre_id = ? ORDER BY title");
+        $query->execute([$genre_id]);  // Aquí debes pasar el valor de $genre_id
         
         $query->execute();
         $songs = $query->fetchAll(PDO::FETCH_OBJ);

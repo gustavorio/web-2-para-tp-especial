@@ -17,7 +17,7 @@ class SongView extends View {
     }
 
     public function showSong($song, $genre) {
-        $song->duration = gmdate("i:s", $song->duration);
+        $song->duration;
         require './app/templates/detail.song.phtml';
     }
 

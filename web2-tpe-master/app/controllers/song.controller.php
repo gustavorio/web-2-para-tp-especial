@@ -22,7 +22,7 @@ class SongController extends Controller{
             //checkeamos si existe en la db
             if ($song) {
                 //pedimos el genero correspondiente usando el FK de la cancion, q corresponde al id del genero
-                $genre = $this->genreModel->getGenre($song->genre);
+                $genre = $this->genreModel->getGenre($song->genre_id);
                 //pasamos al view
                 $this->view->showSong($song, $genre);
             } else {

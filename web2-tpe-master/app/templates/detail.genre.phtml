@@ -5,19 +5,16 @@
     <li class="list-group-item item-task">
         <div>
             <b><?= $genre->nombre ?></b>
-            | <?= $genre->artista ?>
-            | Año: <?= $genre->anio ?>
-            | Discográfica: <?= $genre->discografica ?>
-            | Duración: <?= $duracion ?>
+            | <?= $genre->id ?>
             | Número de tracks: <?= $tracks ?>
         </div>
     </li>
     <?php foreach ($songs as $item) : ?>
         <li class="list-group-item item-task">
             <div>
-                <b><?= $item->track ?></b> 
-                | <a href="songs/<?= $item->cancion_id ?>"><?= $item->cancion_nombre ?></a>
-                | Duración: <?= $item->duracion ?>
+                <b>Artista: <?= $item->artist ?></b>
+                <b>| Cancion: <a href="songs/<?= $item->id ?>"><?= $item->title ?></a><b>
+                | Duración: <?= $item->duration ?>
             </div>
         </li>
     <?php endforeach ?>

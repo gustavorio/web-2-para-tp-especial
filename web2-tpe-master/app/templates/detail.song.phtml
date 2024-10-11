@@ -4,13 +4,12 @@
 <ul class="list-group">
     <li class="list-group-item item-task">
         <div>
-            <b><?= $song->cancion_nombre ?></b>
-            | <a href="albums/<?= $album->album_id ?>"><?= $album->album_nombre?></a>
-            | <?= $album->artista ?>
-            | Año: <?= $album->anio ?>
-            | Discográfica: <?= $album->discografica ?>
-            | Duración: <?= $song->duracion ?>
-            | Número de track: <?= $song->track ?>
+            <b><?= $song->title ?></b>
+            | <a href="genres/<?= $genre->genre_id ?>"><?= $genre->nombre?></a>
+            | <?= $song->artist ?>
+            | Duración: <?= $song->duration ?>
+            <iframe style="border-radius:12px" src="<?= $song->url ?>" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <h5>Lirica de la Cancion:<br/> <?= $song->lyrics ?></h5>
         </div>
     </li>
 </ul>
