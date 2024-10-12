@@ -6,12 +6,12 @@
         </div>
         <div class="form-group">
             <label>Editando Artista:</label>
-            <input required name="cancion" type="text" placeholder="Ingrese el nuevo nombre del/la artista" class="form-control" value="<?= $song->artist?>" >
+            <input required name="artista" type="text" placeholder="Ingrese el nuevo nombre del/la artista" class="form-control" value="<?= $song->artist?>" >
         </div>
         <div class="form-group">
-            <label>Álbum</label>
-            <select required name="genre" class="form-control">
-                <option disabled>Seleccione el álbum</option>
+            <label>Genero:</label>
+            <select required name="genero" class="form-control">
+                <option disabled>Seleccione el Genero:</option>
                 <?php foreach ($genres as $item) : ?>
                     <option 
                     value="<?= $item->id ?>"
