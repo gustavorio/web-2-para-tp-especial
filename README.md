@@ -4,7 +4,7 @@ Entrega 18/09/2024 TPE 1°
 
 Entrega 20/10/2024 TPE 2°
 
-Entrega 17/11/2024 TPE 2°
+Entrega 17/11/2024 TPE 3°
 
 # Integrantes del Proyecto: 
 
